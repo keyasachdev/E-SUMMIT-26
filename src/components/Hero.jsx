@@ -161,8 +161,8 @@ const Hero = () => {
                             {/* Day 1 */}
                             <div className="flex flex-col items-center group cursor-default">
                                 <h3 className="relative font-western text-5xl sm:text-6xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-b from-[#f0e6d2] to-[#c5a059] drop-shadow-lg leading-none transition-transform duration-300 group-hover:-translate-y-2">
-                                    23
-                                    <span className="absolute -top-1 -right-4 sm:-top-2 sm:-right-6 text-base sm:text-xl md:text-2xl font-oriental text-desi-gold tracking-normal">rd</span>
+                                    16
+                                    <span className="absolute -top-1 -right-4 sm:-top-2 sm:-right-6 text-base sm:text-xl md:text-2xl font-oriental text-desi-gold tracking-normal">th</span>
                                 </h3>
                                 <div className="h-[2px] w-0 group-hover:w-full bg-desi-gold transition-all duration-300 mt-2"></div>
                             </div>
@@ -173,7 +173,7 @@ const Hero = () => {
                             {/* Day 2 */}
                             <div className="flex flex-col items-center group cursor-default">
                                 <h3 className="relative font-western text-5xl sm:text-6xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-b from-[#f0e6d2] to-[#c5a059] drop-shadow-lg leading-none transition-transform duration-300 group-hover:-translate-y-2">
-                                    24
+                                    17
                                     <span className="absolute -top-1 -right-4 sm:-top-2 sm:-right-6 text-base sm:text-xl md:text-2xl font-oriental text-desi-gold tracking-normal">th</span>
                                 </h3>
                                 <div className="h-[2px] w-0 group-hover:w-full bg-desi-gold transition-all duration-300 mt-2"></div>
