@@ -155,9 +155,9 @@ const About = () => {
                             {/* Animated Gradient Border Effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
 
-                            <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 transition-opacity">
+                            {/* <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 transition-opacity">
                                 <div className="text-9xl font-display text-retro-accent rotate-90 origin-top-right">26</div>
-                            </div>
+                            </div> */}
 
                             {/* Subtle Glow */}
                             <div className="absolute inset-0 bg-retro-primary/10 blur-[80px] group-hover:bg-retro-primary/20 transition-colors duration-500" />
@@ -169,7 +169,7 @@ const About = () => {
 
                             <div className="relative z-10 mt-auto">
                                 <span className="text-retro-accent font-oriental text-xl mb-2 block">MAIT Presents</span>
-                                <h3 className="text-5xl font-display text-white mb-4">ZENITH</h3>
+                                {/* <h3 className="text-5xl font-display text-white mb-4">ZENITH</h3> */}
                                 <p className="text-gray-400 font-tech text-sm leading-relaxed">
                                     Where ideas connect with opportunity and ambition turns into action.
                                 </p>
