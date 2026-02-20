@@ -269,10 +269,10 @@ const Events = () => {
             regDeadline: "15th March, 2026",
             eligibility: "Open to all undergraduate & postgraduate students. Prior knowledge of Python/trading APIs is recommended.",
             highlights: [
-                "Live paper-trading environment with real market data feeds",
-                "Backtesting phase on historical datasets before live round",
-                "Dedicated mentorship session with quant finance professionals",
-                "Cash prizes + internship opportunities with partner firms",
+                "Algorithmic Trading Competition",
+                "Quantitative strategy building (momentum, mean reversion, arbitrage, etc.)",
+                "Backtesting using historical data",
+                "Risk management (Sharpe ratio, drawdown control)",
             ],
             prizeBreakdown: [
                 { rank: "🥇 1st Place", amount: "₹25,000" },
@@ -302,10 +302,10 @@ const Events = () => {
             regDeadline: "18th March, 2026",
             eligibility: "Open to all students. Designers, marketers, and strategists are encouraged to form cross-disciplinary teams.",
             highlights: [
-                "Real-world companies with actual identity challenges provided on the day",
-                "Creative brief includes brand audit, competitor analysis & new positioning",
-                "Top teams get funding support from EDC's investor network",
-                "Winning rebrand concept featured in national startup media",
+                "Company Transformation & Pitch",
+                "Analyze current brand positioning",
+                "Identify gaps (target audience, USP, brand perception)",
+                "Present a pitch deck",
             ],
             prizeBreakdown: [
                 { rank: "🥇 1st Place", amount: "₹15,000 + Funding" },
@@ -334,10 +334,10 @@ const Events = () => {
             regDeadline: "17th March, 2026",
             eligibility: "Open to all students. MBA/BBA students and those with case competition experience are especially welcome.",
             highlights: [
-                "Live case studies drawn from top global business school archives",
-                "Panel of judges includes active startup founders and CXOs",
-                "30-minute intensive case prep followed by a 15-minute boardroom defence",
-                "Shortlisted teams receive a letter of recognition from EDC",
+                "High Table / Case Round Format",
+                "Case study given (business, finance, operations, policy, etc.)",
+                "Boardroom-style Q&A grilling",
+                "Structured and strategic thinking",
             ],
             prizeBreakdown: [
                 { rank: "🥇 1st Place", amount: "₹12,000" },
