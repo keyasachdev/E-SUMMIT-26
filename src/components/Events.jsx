@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useTransform, useScroll, useMotionTemplate, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Calendar, Trophy, Users, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Calendar, Trophy, Users, AlertCircle, Layers, Star, Clock, CheckCircle2, Info } from 'lucide-react';
 
 const EventPopup = ({ event, onClose }) => {
     return (
@@ -63,9 +63,65 @@ const EventPopup = ({ event, onClose }) => {
                             </div>
                         </div>
 
+                        {/* Key Highlights */}
+                        {event.highlights && (
+                            <section>
+                                <h3 className="text-xl font-oriental text-desi-gold mb-4 flex items-center gap-2">
+                                    <Star size={18} className="text-retro-accent" /> Key Highlights
+                                </h3>
+                                <ul className="space-y-3">
+                                    {event.highlights.map((item, i) => (
+                                        <li key={i} className="flex items-start gap-3 text-gray-300 group">
+                                            <CheckCircle2 size={16} className="text-retro-accent shrink-0 mt-0.5" />
+                                            <span className="font-body leading-relaxed group-hover:text-white transition-colors">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+                        )}
+
+                        {/* Prize Breakdown */}
+                        {event.prizeBreakdown && (
+                            <section>
+                                <h3 className="text-xl font-oriental text-desi-gold mb-4 flex items-center gap-2">
+                                    <Trophy size={18} className="text-retro-accent" /> Prize Breakdown
+                                </h3>
+                                <div className="space-y-2">
+                                    {event.prizeBreakdown.map((tier, i) => (
+                                        <div key={i} className="flex items-center justify-between bg-white/5 px-4 py-3 rounded-xl border border-white/5 hover:border-retro-accent/30 transition-colors">
+                                            <span className="font-tech text-sm text-gray-400 uppercase tracking-wider">{tier.rank}</span>
+                                            <span className="font-display text-white text-lg">{tier.amount}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Rounds */}
+                        {event.rounds && (
+                            <section>
+                                <h3 className="text-xl font-oriental text-desi-gold mb-4 flex items-center gap-2">
+                                    <Layers size={18} className="text-retro-accent" /> Event Rounds
+                                </h3>
+                                <ol className="space-y-3 relative border-l border-white/10 pl-6 ml-2">
+                                    {event.rounds.map((round, i) => (
+                                        <li key={i} className="relative group">
+                                            <div className="absolute -left-[1.85rem] top-1 w-4 h-4 rounded-full bg-retro-accent/10 border border-retro-accent/40 flex items-center justify-center group-hover:bg-retro-accent/30 transition-colors">
+                                                <span className="text-[9px] text-retro-accent font-bold">{i + 1}</span>
+                                            </div>
+                                            <p className="text-gray-300 font-body leading-relaxed group-hover:text-white transition-colors">{round}</p>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </section>
+                        )}
+
                         {/* Rules or Evaluation Section */}
                         <section>
-                            <h3 className="text-2xl font-oriental text-desi-gold mb-6">{event.EvaluationCriteria ? "Evaluation Criteria" : "Rules & Regulations"}</h3>
+                            <h3 className="text-xl font-oriental text-desi-gold mb-4 flex items-center gap-2">
+                                <Info size={18} className="text-retro-accent" />
+                                {event.EvaluationCriteria ? "Evaluation Criteria" : "Rules & Regulations"}
+                            </h3>
                             <ul className="space-y-4">
                                 {(event.EvaluationCriteria || event.rules || []).map((item, i) => (
                                     <li key={i} className="flex items-start gap-4 text-gray-400 group">
@@ -78,11 +134,19 @@ const EventPopup = ({ event, onClose }) => {
                             </ul>
                         </section>
 
+                        {/* Eligibility */}
+                        {event.eligibility && (
+                            <section className="bg-white/[0.03] rounded-2xl p-5 border border-white/5">
+                                <h3 className="text-sm font-tech text-gray-400 uppercase tracking-widest mb-3">Eligibility</h3>
+                                <p className="text-gray-300 font-body leading-relaxed">{event.eligibility}</p>
+                            </section>
+                        )}
+
                         {/* Footer Action */}
                         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-6 items-center justify-between">
                             <div className="flex flex-col">
                                 <span className="text-sm text-gray-500 font-tech uppercase tracking-wider mb-1">Registration Closes</span>
-                                <span className="text-white font-body font-semibold flex items-center gap-2"><Calendar size={16} className="text-retro-primary" /> 20th March, 2026</span>
+                                <span className="text-white font-body font-semibold flex items-center gap-2"><Calendar size={16} className="text-retro-primary" /> {event.regDeadline || "20th March, 2026"}</span>
                             </div>
                             <button className="px-8 py-4 bg-gradient-to-r from-retro-primary to-retro-secondary text-white font-bold font-tech tracking-widest rounded-lg hover:scale-105 transition-transform shadow-lg shadow-retro-primary/20">
                                 REGISTER NOW
@@ -198,56 +262,197 @@ const Events = () => {
         {
             title: "TRADING ALGO",
             desc: "Algorithmic Trading Competition",
-            fullDesc: "Participants design and implement an algorithm that automatically executes trades in financial markets based on predefined logic",
+            fullDesc: "Participants design and implement an algorithm that automatically executes trades in financial markets based on predefined logic. Code your edge, dominate the market.",
             color: "from-retro-purple to-indigo-900",
             prize: "₹50,000",
             teamSize: "3-4 Members",
-            EvaluationCriteria: ["Profitability", "Risk-adjusted returns", "Robustness of strategy", "Code efficiency and logic"]
+            regDeadline: "15th March, 2026",
+            eligibility: "Open to all undergraduate & postgraduate students. Prior knowledge of Python/trading APIs is recommended.",
+            highlights: [
+                "Live paper-trading environment with real market data feeds",
+                "Backtesting phase on historical datasets before live round",
+                "Dedicated mentorship session with quant finance professionals",
+                "Cash prizes + internship opportunities with partner firms",
+            ],
+            prizeBreakdown: [
+                { rank: "🥇 1st Place", amount: "₹25,000" },
+                { rank: "🥈 2nd Place", amount: "₹15,000" },
+                { rank: "🥉 3rd Place", amount: "₹10,000" },
+            ],
+            rounds: [
+                "Round 1 — Strategy Submission: Submit your algorithm logic and pseudocode for initial screening.",
+                "Round 2 — Backtesting: Run your strategy on 3-year historical data; results evaluated by the panel.",
+                "Round 3 — Live Trading: Execute real-time paper trades in a 2-hour live market session.",
+                "Grand Finale — Pitch to Quants: Present your strategy rationale to a panel of industry judges.",
+            ],
+            EvaluationCriteria: [
+                "Profitability — net returns over the live trading session",
+                "Risk-adjusted returns — Sharpe ratio and max drawdown analysis",
+                "Robustness of strategy — performance across multiple market conditions",
+                "Code efficiency, clarity, and originality of logic",
+            ],
         },
         {
             title: "REBRANDING",
             desc: "Company Transformation & Pitch",
-            fullDesc: "You’re given an existing company (often outdated or struggling) and must redesign its identity and reposition it in the market",
+            fullDesc: "You're given an existing company (often outdated or struggling) and must redesign its identity and reposition it in the market. Reimagine the brand, rebuild the future.",
             color: "from-retro-primary to-rose-900",
             prize: "Funding + ₹30,000",
             teamSize: "1-3 Members",
-            EvaluationCriteria: ["Creativity + practicality", "Market research logic", "Strategic alignment", "Persuasiveness of pitch"]
+            regDeadline: "18th March, 2026",
+            eligibility: "Open to all students. Designers, marketers, and strategists are encouraged to form cross-disciplinary teams.",
+            highlights: [
+                "Real-world companies with actual identity challenges provided on the day",
+                "Creative brief includes brand audit, competitor analysis & new positioning",
+                "Top teams get funding support from EDC's investor network",
+                "Winning rebrand concept featured in national startup media",
+            ],
+            prizeBreakdown: [
+                { rank: "🥇 1st Place", amount: "₹15,000 + Funding" },
+                { rank: "🥈 2nd Place", amount: "₹10,000" },
+                { rank: "🥉 3rd Place", amount: "₹5,000" },
+            ],
+            rounds: [
+                "Round 1 — Brand Audit: Identify the core flaws and strengths of the given company.",
+                "Round 2 — Strategy Deck: Present your new brand strategy, including logo direction, tone of voice & target audience.",
+                "Grand Finale — Investor Pitch: Deliver a full rebrand pitch to a panel of venture capitalists and brand experts.",
+            ],
+            EvaluationCriteria: [
+                "Creativity balanced with market practicality",
+                "Depth and accuracy of market research",
+                "Strategic brand alignment and coherent visual identity",
+                "Persuasiveness and delivery of the pitch",
+            ],
         },
         {
             title: "HI-TABLE",
             desc: "High Table / Case Round Format",
-            fullDesc: "A high-pressure boardroom-style competition where teams present solutions to judges (acting as investors, CEOs, or board members",
+            fullDesc: "A high-pressure boardroom-style competition where teams present solutions to judges acting as investors, CEOs, or board members. Command the room. Own the narrative.",
             color: "from-retro-accent to-amber-900",
             prize: "₹20,000",
             teamSize: "2-3 Members",
-            EvaluationCriteria: ["Depth of analysis", "Confidence & articulation", "Structured thinking", "Handling counter-questions"]
+            regDeadline: "17th March, 2026",
+            eligibility: "Open to all students. MBA/BBA students and those with case competition experience are especially welcome.",
+            highlights: [
+                "Live case studies drawn from top global business school archives",
+                "Panel of judges includes active startup founders and CXOs",
+                "30-minute intensive case prep followed by a 15-minute boardroom defence",
+                "Shortlisted teams receive a letter of recognition from EDC",
+            ],
+            prizeBreakdown: [
+                { rank: "🥇 1st Place", amount: "₹12,000" },
+                { rank: "🥈 2nd Place", amount: "₹5,000" },
+                { rank: "🥉 3rd Place", amount: "₹3,000" },
+            ],
+            rounds: [
+                "Preliminary Round — Teams receive a case study and have 30 minutes to prepare their analysis.",
+                "Boardroom Presentation — 15-minute structured presentation followed by 10 minutes of intense Q&A.",
+                "Grand Finale — Top 4 teams face a curveball business scenario for a live, unscripted boardroom battle.",
+            ],
+            EvaluationCriteria: [
+                "Depth and quality of business analysis",
+                "Confidence, clarity, and articulation under pressure",
+                "Structured and logical thinking flow",
+                "Ability to handle and convincingly answer counter-questions",
+            ],
         },
         {
             title: "ESPORTS",
             desc: "Battle for ultimate glory.",
-            fullDesc: "Compete in top-tier titles like Valorant and BGMI. showcase your reflexes, strategy, and teamwork on the big stage.",
+            fullDesc: "Compete in top-tier titles like Valorant and BGMI. Showcase your reflexes, strategy, and teamwork on the big stage. Only the sharpest survive.",
             color: "from-emerald-600 to-green-950",
             prize: "₹25,000",
             teamSize: "5 Members",
-            rules: ["Bring your own peripherals (Mouse/Keyboard allowed).", "Standard tournament draft rules apply.", "Toxic behavior leads to immediate disqualification."]
+            regDeadline: "20th March, 2026",
+            eligibility: "Open to all college students with valid student ID. Participants must be enrolled in a college/university.",
+            highlights: [
+                "Double-elimination tournament bracket for maximum competitive depth",
+                "High-spec gaming PCs provided at the venue (bring your own peripherals)",
+                "Live stream with commentary broadcast on the E-Summit YouTube channel",
+                "Merch drops and surprise giveaways for audience and participants",
+            ],
+            prizeBreakdown: [
+                { rank: "🥇 Champions", amount: "₹15,000" },
+                { rank: "🥈 Runners-Up", amount: "₹7,000" },
+                { rank: "🥉 3rd Place", amount: "₹3,000" },
+            ],
+            rounds: [
+                "Group Stage — Round-robin format across 4 groups; top 2 from each advance.",
+                "Quarterfinals & Semifinals — Single-elimination best-of-3 matches.",
+                "Grand Final — Best-of-5 series on the main stage with live audience.",
+            ],
+            rules: [
+                "Bring your own peripherals (Mouse, Keyboard, Headset allowed).",
+                "Standard tournament draft and map-pick rules apply per game title.",
+                "Toxic behavior, smurfing, or cheating leads to immediate disqualification.",
+                "Team must have all 5 members checked-in 30 minutes before match time.",
+            ],
         },
         {
             title: "ROBOWARS",
             desc: "Metal on metal showdown.",
-            fullDesc: "The ultimate destruction derby. Build a combat robot and destroy your opponents in the arena. Sparks will fly!",
+            fullDesc: "The ultimate destruction derby. Build a combat robot and destroy your opponents in the arena. Sparks will fly, metal will clash — only the strongest bot survives.",
             color: "from-slate-500 to-gray-900",
             prize: "₹40,000",
             teamSize: "4-6 Members",
-            rules: ["Bot weight limit: 15kg / 60kg categories.", "No liquid projectiles or EMP devices.", "Safety inspection is mandatory before matches."]
+            regDeadline: "10th March, 2026",
+            eligibility: "Open to all UG/PG engineering and technical students. Teams must submit a robot design blueprint during registration.",
+            highlights: [
+                "Two weight categories: Featherweight (15 kg) and Middleweight (60 kg)",
+                "Custom combat arena built to international Robowars standards",
+                "Technical panel inspection ensures safety and fair competition",
+                "Top teams get featured in Robotics Today magazine",
+            ],
+            prizeBreakdown: [
+                { rank: "🥇 1st Place", amount: "₹20,000" },
+                { rank: "🥈 2nd Place", amount: "₹12,000" },
+                { rank: "🥉 3rd Place", amount: "₹8,000" },
+            ],
+            rounds: [
+                "Registration & Blueprint Review — Submit your robot design for safety and compliance check.",
+                "Qualification Bouts — 2-minute timed fights; top 8 bots advance.",
+                "Elimination Rounds — Single-elimination head-to-head battles.",
+                "Grand Championship — Final two bots clash in a winner-takes-all 3-minute fight.",
+            ],
+            rules: [
+                "Bot weight limit strictly enforced: 15 kg (Featherweight) / 60 kg (Middleweight).",
+                "No liquid projectiles, EMP devices, or radio-jamming equipment.",
+                "Pneumatic and hydraulic weapons allowed; open flames strictly prohibited.",
+                "Safety inspection is mandatory before every match — non-compliant bots are disqualified.",
+            ],
         },
         {
             title: "TRADING",
             desc: "High stakes stock simulation.",
-            fullDesc: "Master the markets in this real-time stock trading simulation. Analyze trends, make moves, and maximize your portfolio value.",
+            fullDesc: "Master the markets in this real-time stock trading simulation. Analyze trends, make bold moves, and maximize your portfolio value before the bell rings.",
             color: "from-sky-600 to-blue-950",
             prize: "₹15,000",
             teamSize: "Solo / Duo",
-            rules: ["Initial virtual capital: ₹10,00,000", "Market manipulation exploits are banned.", "Portfolio value at market close determines the winner."]
+            regDeadline: "20th March, 2026",
+            eligibility: "Open to all students. No prior trading experience required — just sharp analytical thinking and nerves of steel.",
+            highlights: [
+                "Real-time simulated stock market with live price fluctuations",
+                "News feed injects market-moving events throughout the session",
+                "Leaderboard updated every 10 minutes for intense live competition",
+                "Top finishers receive trading platform subscriptions as bonus prizes",
+            ],
+            prizeBreakdown: [
+                { rank: "🥇 1st Place", amount: "₹8,000" },
+                { rank: "🥈 2nd Place", amount: "₹5,000" },
+                { rank: "🥉 3rd Place", amount: "₹2,000" },
+            ],
+            rounds: [
+                "Orientation Round — Market rules and trading platform walkthrough (30 minutes).",
+                "Morning Session — 90-minute trading session; establish your portfolio strategy.",
+                "Afternoon Session — Final 60-minute sprint with surprise market events.",
+                "Results & Awards — Top portfolios announced and winners felicitated.",
+            ],
+            rules: [
+                "Initial virtual capital: ₹10,00,000 per participant or team.",
+                "Market manipulation exploits, bots, or scripts are strictly banned.",
+                "Portfolio value at market close (session end) determines the final ranking.",
+                "All trades must be executed within the provided simulation platform only.",
+            ],
         },
     ];
 
